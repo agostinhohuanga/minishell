@@ -27,11 +27,11 @@ $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 
 # Link object files to create executable
-$(TARGET): $(OBJ_DIR) $(BIN_DIR) $(OBJS)
+$(TARGET): $(OBJS) | $(OBJ_DIR) $(BIN_DIR)
 	$(CC) $(OBJS) -o $(TARGET) $(LDFLAGS)
 
 # Compile source files to object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean build artifacts
